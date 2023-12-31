@@ -11,4 +11,5 @@ COPY --from=back /var/www/html/vendor /var/www/html/vendor
 COPY --from=back /var/www/html/public /var/www/html/public
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY start-container /usr/local/bin/start-container
 HEALTHCHECK CMD curl --fail http://localhost:8000/are-u-ok || exit 1
