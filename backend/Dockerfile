@@ -12,5 +12,4 @@ COPY --from=back /var/www/html/public /var/www/html/public
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY start-container /usr/local/bin/start-container
-
-ENTRYPOINT ["start-container"]
+RUN chmod +x /usr/local/bin/start-container
