@@ -1,6 +1,11 @@
 name: Build and Deploy Docker Image
 
 on:
+  push:
+    branches:
+        - 'main'
+    path:
+        - 'backend/**'
   workflow_call:
   release:
     types: [ released ]
@@ -30,7 +35,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: ./backend
-        file: ./Dockerfile
+        file: ./backend/Dockerfile
         push: true
         tags: ${{ env.IMAGE_URL }}
         build-args: |
