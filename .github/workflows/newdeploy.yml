@@ -21,7 +21,7 @@ jobs:
       with:
             registry: ghcr.io
             username: ${{ github.actor }}
-            password: ${{ secrets.TOKEN }}
+            password: ${{ secrets.ci.TOKEN }}
 
     - name: Preset Image Name
       run: echo "IMAGE_URL=$(echo ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}:$(echo ${{ github.sha }} | cut -c1-7) | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
@@ -39,7 +39,7 @@ jobs:
     - name: Deploy Image to CapRrover
       uses: caprover/deploy-from-github@v1.1.2
       with:
-        server: "${{ secrets.CAPROVER }}"
+        server: "${{ secrets.ci.CAPROVER }}"
         app: "iot-app"
-        token: "${{ secrets.APP_TOKEN }}"
+        token: "${{ secrets.ci.APP_TOKEN }}"
         image: ${{ env.IMAGE_URL }}
