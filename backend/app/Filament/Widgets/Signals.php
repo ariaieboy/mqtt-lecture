@@ -29,6 +29,9 @@ class Signals extends BaseWidget
                 Tables\Columns\TextColumn::make('topic'),
                 Tables\Columns\TextColumn::make('message')
             ])->paginated(false)
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
+            ])
             ->poll();
     }
 }
