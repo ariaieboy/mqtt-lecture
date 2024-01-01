@@ -123,6 +123,9 @@ void setup() {
 
   pinMode(LED_BUILTIN, OUTPUT);  // Initialize the LED_BUILTIN pin as an output
 
+  //set default value for LED_BUILTIN
+  digitalWrite(LED_BUILTIN, HIGH);  // Turn off the LED
+  ledState = false;
   // you can use the insecure mode, when you want to avoid the certificates
   //espclient->setInsecure();
 
