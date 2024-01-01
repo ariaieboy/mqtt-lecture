@@ -27,7 +27,8 @@ class Signals extends BaseWidget
             ])
             ->columns([
                 Tables\Columns\TextColumn::make('topic'),
-                Tables\Columns\TextColumn::make('message')
+                Tables\Columns\TextColumn::make('message'),
+                Tables\Columns\TextColumn::make('created_at')->since(),
             ])->paginated(false)
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
