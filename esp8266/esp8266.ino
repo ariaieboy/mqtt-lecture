@@ -12,12 +12,10 @@
 // are present.
 BearSSL::CertStore certStore;
 
-WiFiClientSecure espClient;
 PubSubClient* client;
 unsigned long lastMsg = 0;
 #define MSG_BUFFER_SIZE (500)
 char msg[MSG_BUFFER_SIZE];
-int value = 0;
 bool ledState = false;
 const char* toggle_command = "toggle";
 
@@ -126,8 +124,6 @@ void setup() {
   //set default value for LED_BUILTIN
   digitalWrite(LED_BUILTIN, HIGH);  // Turn off the LED
   ledState = false;
-  // you can use the insecure mode, when you want to avoid the certificates
-  //espclient->setInsecure();
 
   int numCerts = certStore.initCertStore(LittleFS, PSTR("/certs.idx"), PSTR("/certs.ar"));
   Serial.printf("Number of CA certs read: %d\n", numCerts);
@@ -155,7 +151,6 @@ void loop() {
   unsigned long now = millis();
   if (now - lastMsg > 30000) {
     lastMsg = now;
-    ++value;
     snprintf(msg, MSG_BUFFER_SIZE, "RSSI: %d dBm\n", WiFi.RSSI());
     Serial.print("Publish message: ");
     Serial.println(msg);
